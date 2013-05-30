@@ -1,13 +1,11 @@
-﻿using System;
+﻿using ReportGenerator.Converters;
+using ReportGenerator.Helpers;
+using ReportGenerator.Profiles;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using Excel = Microsoft.Office.Interop.Excel;
-using Office = Microsoft.Office.Core;
-using Microsoft.Office.Tools.Excel;
 using System.IO;
-using ReportGenerator.Converters;
+using System.Linq;
+using System.Xml.Serialization;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ReportGenerator
 {
@@ -37,6 +35,11 @@ namespace ReportGenerator
         private Excel.Sheets Sheets { get; set; }
         private Excel.Workbooks Workbooks { get; set; }
         private Excel.Workbook ThisWorkbook { get; set; }
+
+        public Dictionary<string, EngineerProfile> ProfilesDictionary = new Dictionary<string, EngineerProfile>();
+        public EngineerProfile TesterProfile { get; set; }
+        public EngineerProfile NetDeveloperProfile { get; set; }
+        public EngineerProfile JavaDeveloperProfile { get; set; }
 
         #region Event_Handlers
         void Application_SheetActivate(object Sh)
@@ -85,7 +88,7 @@ namespace ReportGenerator
             Application.WorkbookOpen -= Application_WorkbookOpen;
             Application.WorkbookNewSheet -= Application_WorkbookNewSheet;
         }
-       
+
         #region VSTO generated code
 
         /// <summary>
@@ -103,9 +106,68 @@ namespace ReportGenerator
         public void ConvertAssessment(AssessmentConverter converter)
         {
             Assessment oldAssessment = Assessment.Build(ActiveSheet);
-            var newAssessment = converter.Convert(oldAssessment, ReportConfiguration.Instance.ConfigurationFilePath);
+            //var newAssessment = converter.Convert(oldAssessment, ReportConfiguration.Instance.ConfigurationFilePath);
+            
+            EngineerProfile profile = LoadEngineerProfile(oldAssessment);
+            if (profile == null)
+            {
+                System.Windows.Forms.MessageBox.Show("Unable to detect a profile of assessment, ensure please: 1) profile configuration has keywords selected, 2) assessment has keywords.");
+                return;
+            }
+            var excelRows=converter.Convert(oldAssessment, profile);
+
+            var newWorkBook = Workbooks.Add();
+            var activeSheet = newWorkBook.ActiveSheet as Excel.Worksheet;
+            //write header
+            var worker = new ExcelWorker(activeSheet);
+            int row = 2;
+            foreach (var header in profile.Header.Scales)
+            {
+                worker.SetAValue(row++, header);
+            }
+            //2 rows separation
+            row += 2;
+            
         }
 
-        
+       
+
+        private EngineerProfile LoadEngineerProfile(Assessment assessment)
+        {
+            ProfilesDictionary.Add("tester", LoadProfile("tester"));
+            ProfilesDictionary.Add("netdeveloper", LoadProfile("netdeveloper"));
+            ProfilesDictionary.Add("javadeveloper", LoadProfile("javadeveloper"));
+            return DetectProfile(ProfilesDictionary, assessment);
+        }
+
+        private EngineerProfile LoadProfile(string pattern)
+        {
+            EngineerProfile profile = null;
+            string path = ReportConfiguration.Instance.ConfigurationProfileDirectory;
+            pattern = string.Format("{0}*.xml");
+            var configFile = Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly).SingleOrDefault();
+            if (string.IsNullOrEmpty(configFile))
+                System.Windows.Forms.MessageBox.Show(string.Format("Unable to load {0} config file, ensure file exists in {1} ", pattern, path), "Error");
+            else
+            {
+                profile = XmlLoader.LoadFromXml<EngineerProfile>(configFile);
+            }
+            return profile;
+        }
+        private EngineerProfile DetectProfile(Dictionary<string, EngineerProfile> profilesDictionary, Assessment oldAssessment)
+        {
+            var allTechnologies = oldAssessment.GetAllTechnologies();
+            foreach (var profileKey in profilesDictionary.Keys)
+            {
+                var profile = profilesDictionary[profileKey];
+                var keywords = profile.GetProfileKeyWords();
+                if(keywords.All(r => allTechnologies.Contains(r)))
+                    return profile;
+            }
+
+            return null;
+
+        }
+
     }
 }

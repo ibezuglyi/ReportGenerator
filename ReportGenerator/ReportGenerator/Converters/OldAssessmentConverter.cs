@@ -7,17 +7,10 @@ namespace ReportGenerator.Converters
 {
     public class OldAssessmentConverter : AssessmentConverter
     {
-        protected override Assessment ConvertAssessment(Assessment assessment)
+
+        protected override List<Profiles.TechnologyItem> ConvertAssessment(Assessment assessment, Profiles.EngineerProfile profile)
         {
-            if (assessment == null)
-                return null;
-
-            if (assessment.Version == Version.New)
-                return assessment;
-
-            Assessment oldAssessment = new Assessment();
-
-            return oldAssessment;
+            throw new NotImplementedException();
         }
     }
 }

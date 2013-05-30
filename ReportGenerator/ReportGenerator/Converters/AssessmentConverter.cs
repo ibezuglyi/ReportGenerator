@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReportGenerator.Profiles;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,15 +12,11 @@ namespace ReportGenerator.Converters
     {
         private Configuration.Configuration currentConfiguration;
 
-        public Assessment Convert(Assessment assessment, string configurationPath)
+        public List<TechnologyItem> Convert(Assessment assessment, EngineerProfile profile) 
         {
-            currentConfiguration = GetConfiguration(configurationPath);
-            if (currentConfiguration == null)
-                return null;
-
-            return ConvertAssessment(assessment);
+            return ConvertAssessment(assessment, profile);
         }
-        protected abstract Assessment ConvertAssessment(Assessment assessment);
+        protected abstract List<TechnologyItem> ConvertAssessment(Assessment assessment, EngineerProfile profile);
 
         private Configuration.Configuration GetConfiguration(string configurationPath)
         {
