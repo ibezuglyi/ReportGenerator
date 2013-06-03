@@ -33,7 +33,8 @@ namespace ReportGenerator.Helpers
         public string GetValue(int currentRow, string currentColumn)
         {
             var cell = GetCell(currentRow, currentColumn);
-            return GetValue(cell);
+            var value = GetValue(cell);
+            return string.IsNullOrEmpty(value) ? value : value.Trim();
         }
 
         private static string GetCell(int currentRow, string currentColumn)
@@ -59,6 +60,16 @@ namespace ReportGenerator.Helpers
             if (color != 0)
                 range.Interior.Color = color;
 
+            return range;
+        }
+        public static Range SetWidth(this Range range, int width)
+        {
+            range.EntireColumn.ColumnWidth = width;
+            return range;
+        }
+        public static Range SetAlignment(this Range range, Microsoft.Office.Interop.Excel.XlHAlign alignment)
+        {
+            range.Style.HorizontalAlignment = alignment;
             return range;
         }
         public static Range SetBold(this Range range, bool isBold)

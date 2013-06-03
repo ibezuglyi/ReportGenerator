@@ -12,7 +12,7 @@
   </Header>
   <OldProfile>
     <TechnologyList>
-      <TechnologyItem Technology="JavaEE" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="JavaEE" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) Multi-tier architecture and JavaEE technology" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -30,7 +30,7 @@
       <TechnologyItem Technology="CSS" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="JSTL" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="JSTL" Color="0" isBold="false" isMerged="false" IsKeyWord="true" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="Ajax (ex.DWR)," Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -51,7 +51,7 @@
       <TechnologyItem Technology="EJB (2.1, 3.0)" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Hibernate," Color="0" isBold="false" isMerged="false" IsKeyWord="true" Method="Default">
+      <TechnologyItem Technology="Hibernate," Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="OpenJPA" Color="0" isBold="false" isMerged="false" IsKeyWord="true" Method="Default">
@@ -93,7 +93,7 @@
       <TechnologyItem Technology="VPLF1.5" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Spring MVC" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Spring MVC" Color="0" isBold="false" isMerged="false" IsKeyWord="true" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="Struts 1.X" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -162,7 +162,7 @@
       <TechnologyItem Technology="Glasfish" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Databases" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Databases" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) Relation databases (e.g. DML)" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -186,7 +186,7 @@
       <TechnologyItem Technology="3) Tools for working with databases" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="OS" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="OS" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) Unix/Linux (shell commands and scripting)" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -195,7 +195,7 @@
       <TechnologyItem Technology="2) Microsoft Windows" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Modeling" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Modeling" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) UML practical knowledge" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -216,7 +216,7 @@
       <TechnologyItem Technology="3) Prototyping modeling" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Software engineering" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Software engineering" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) Source control system" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -282,14 +282,14 @@
       <TechnologyItem Technology="7) Continous Integration (Hudson/Cruise Control)" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Recommended Certificates" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Recommended Certificates" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
     </TechnologyList>
   </OldProfile>
   <NewProfile>
     <TechnologyList>
-      <TechnologyItem Technology="JavaSE" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="JavaSE" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) Java SE 1.4" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -307,7 +307,7 @@
       <TechnologyItem Technology="Swing/ AWT" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Java Enterprise Technologies" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Java Enterprise Technologies" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) JavaEE technologies" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -454,7 +454,7 @@
       <TechnologyItem Technology="Other" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="XML General Knowledge" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="XML General Knowledge" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="XML Parsing" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -466,7 +466,7 @@
       <TechnologyItem Technology="XSL/ XSLT Transformations" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Presentation tier" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Presentation tier" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="HTML 4" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -481,7 +481,7 @@
       <TechnologyItem Technology="CSS" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Databases" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Databases" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) Relation databases (including DML)" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -520,7 +520,7 @@
       <TechnologyItem Technology="3) Database development and administration software" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="OS" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="OS" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) Unix/Linux (shell commands and scripting)" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -529,7 +529,7 @@
       <TechnologyItem Technology="2) Microsoft Windows" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Modeling" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Modeling" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) UML practical knowledge" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -550,7 +550,7 @@
       <TechnologyItem Technology="3) Prototyping modeling" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Software engineering" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Software engineering" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="1) Source control system" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -634,7 +634,7 @@
       <TechnologyItem Technology="CruiseControl" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Quality" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Quality" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="Sonar" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -649,7 +649,7 @@
       <TechnologyItem Technology="CheckStyle" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Project Management" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Project Management" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="MS Project" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -658,7 +658,7 @@
       <TechnologyItem Technology="Redmine" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
-      <TechnologyItem Technology="Other" Color="10079487" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+      <TechnologyItem Technology="Other" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
         <MapToTechnologies />
       </TechnologyItem>
       <TechnologyItem Technology="Algorithms" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">

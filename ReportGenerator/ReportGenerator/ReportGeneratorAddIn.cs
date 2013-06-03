@@ -125,10 +125,10 @@ namespace ReportGenerator
             {
                 worker.SetAValue(row++, header);
             }
-            //2 rows separation
+            //2 rows separation 
             row += 2;
-            worker.SetAValue(row, "Technical Area").SetBold(true).SetColor(10079487);
-            worker.SetValue(row, "B", "Scale 0-4").SetBold(true).SetColor(10079487);
+            worker.SetAValue(row, "Technical Area").SetBold(true).SetColor(Assessment.OleHeaderColor).SetWidth(60);
+            worker.SetValue(row, "B", "Scale 0-4").SetBold(true).SetColor(Assessment.OleHeaderColor);
 
             row++;
             foreach (var item in excelRows)
@@ -137,7 +137,7 @@ namespace ReportGenerator
                 worker.SetValue(row, "B", item.Scale).SetColor(item.Color).SetBold(item.isBold);
                 row++;
             }
-            
+
             newWorkBook.SaveAs("a.xls", Excel.XlFileFormat.xlOpenXMLWorkbook);
         }
 
@@ -169,13 +169,12 @@ namespace ReportGenerator
         private EngineerProfile DetectProfile(Dictionary<string, EngineerProfile> profilesDictionary, Assessment oldAssessment)
         {
             var allTechnologies = oldAssessment.GetAllTechnologies();
-            foreach (var profileKey in profilesDictionary.Keys)
+            foreach (var profile in profilesDictionary.Values)
             {
-                var profile = profilesDictionary[profileKey];
                 if (profile != null)
                 {
                     var keywords = profile.GetProfileKeyWords();
-                    if (keywords.All(r => allTechnologies.Contains(r)))
+                    if (keywords.Count() > 0 && keywords.All(r => allTechnologies.Contains(r)))
                         return profile;
                 }
             }
