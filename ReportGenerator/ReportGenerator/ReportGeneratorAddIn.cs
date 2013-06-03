@@ -107,14 +107,14 @@ namespace ReportGenerator
         {
             Assessment oldAssessment = Assessment.Build(ActiveSheet);
             //var newAssessment = converter.Convert(oldAssessment, ReportConfiguration.Instance.ConfigurationFilePath);
-            
+
             EngineerProfile profile = LoadEngineerProfile(oldAssessment);
             if (profile == null)
             {
                 System.Windows.Forms.MessageBox.Show("Unable to detect a profile of assessment, ensure please: 1) profile configuration has keywords selected, 2) assessment has keywords.");
                 return;
             }
-            var excelRows=converter.Convert(oldAssessment, profile);
+            var excelRows = converter.Convert(oldAssessment, profile);
 
             var newWorkBook = Workbooks.Add();
             var activeSheet = newWorkBook.ActiveSheet as Excel.Worksheet;
@@ -127,13 +127,25 @@ namespace ReportGenerator
             }
             //2 rows separation
             row += 2;
+            worker.SetAValue(row, "Technical Area").SetBold(true).SetColor(10079487);
+            worker.SetValue(row, "B", "Scale 0-4").SetBold(true).SetColor(10079487);
+
+            row++;
+            foreach (var item in excelRows)
+            {
+                worker.SetAValue(row, item.Technology).SetColor(item.Color).SetBold(item.isBold);
+                worker.SetValue(row, "B", item.Scale).SetColor(item.Color).SetBold(item.isBold);
+                row++;
+            }
             
+            newWorkBook.SaveAs("a.xls", Excel.XlFileFormat.xlOpenXMLWorkbook);
         }
 
-       
+
 
         private EngineerProfile LoadEngineerProfile(Assessment assessment)
         {
+            ProfilesDictionary.Clear();
             ProfilesDictionary.Add("tester", LoadProfile("tester"));
             ProfilesDictionary.Add("netdeveloper", LoadProfile("netdeveloper"));
             ProfilesDictionary.Add("javadeveloper", LoadProfile("javadeveloper"));
@@ -144,7 +156,7 @@ namespace ReportGenerator
         {
             EngineerProfile profile = null;
             string path = ReportConfiguration.Instance.ConfigurationProfileDirectory;
-            pattern = string.Format("{0}*.xml");
+            pattern = string.Format("{0}.profile", pattern);
             var configFile = Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly).SingleOrDefault();
             if (string.IsNullOrEmpty(configFile))
                 System.Windows.Forms.MessageBox.Show(string.Format("Unable to load {0} config file, ensure file exists in {1} ", pattern, path), "Error");
@@ -160,9 +172,12 @@ namespace ReportGenerator
             foreach (var profileKey in profilesDictionary.Keys)
             {
                 var profile = profilesDictionary[profileKey];
-                var keywords = profile.GetProfileKeyWords();
-                if(keywords.All(r => allTechnologies.Contains(r)))
-                    return profile;
+                if (profile != null)
+                {
+                    var keywords = profile.GetProfileKeyWords();
+                    if (keywords.All(r => allTechnologies.Contains(r)))
+                        return profile;
+                }
             }
 
             return null;

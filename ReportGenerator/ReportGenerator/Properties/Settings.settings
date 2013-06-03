@@ -6,7 +6,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ConfigurationProfileDirectory" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">"D:\excel\"</Value>
+      <Value Profile="(Default)">D:\excel\</Value>
     </Setting>
   </Settings>
 </SettingsFile>

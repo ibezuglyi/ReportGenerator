@@ -13,7 +13,9 @@ namespace ReportGenerator.Console
     {
         private static EngineerProfile BuildProfile()
         {
+
             EngineerProfile prof = new EngineerProfile();
+
             prof.Header.Scales.AddRange(
 
                 new List<string>() { "Scale (0-4)", "0 - No experience.", "1 - Beginner (is able to perform simple task under supervision, usually less than 1 year of experience)",
@@ -21,23 +23,51 @@ namespace ReportGenerator.Console
                 "3 - Expert (is able to perform task without supervision, mentor/coach for others, usually 2-5 year of experience)",
                 "4 - Guru"
                 });
-            var item = new TechnologyItem() { Technology = "JavaEE", Color = 34567, isBold = true, isMerged = true };
-            item.MapToTechnologies.Add("JavaEE");
-            prof.OldProfile.TechnologyList.Add(item);
-            item = new TechnologyItem() { Technology = "1) Multi-tier architecture and JavaEE technology", Color = 0, isBold = false, isMerged = false };
-            prof.OldProfile.TechnologyList.Add(item);
-            prof.OldProfile.TechnologyList.Add(new TechnologyItem() { Technology = "2) JavaEE technologies", Color = 0, isBold = false, isMerged = false });
-            item = new TechnologyItem() { Technology = " JSP + HTML, ", Color = 0, isBold = false, isMerged = false };
-            item.MapToTechnologies.Add("JSP");
-            prof.OldProfile.TechnologyList.Add(item);
-            prof.NewProfile.TechnologyList.Add(new TechnologyItem() { Technology = "JavaSE", Color = 34567, isBold = true, isMerged = true });
-            prof.NewProfile.TechnologyList.Add(new TechnologyItem() { Technology = "1) Java SE 1.4", Color = 0, isBold = true, isMerged = false });
-
+          
             return prof;
 
         }
 
         static void Main(string[] args)
+        {
+            var profile = BuildProfileP();
+
+            ReadFromFile(@"d:\profile.old", profile.OldProfile);
+            ReadFromFile(@"d:\profile.new", profile.NewProfile);
+
+            using (var stream = new StreamWriter(@"d:\profile.xml"))
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(EngineerProfile));
+                xml.Serialize(stream, profile);
+            }
+        }
+
+        private static void ReadFromFile(string path, Technologies techs)
+        {
+            var profs = File.ReadAllLines(path);
+            foreach (var p in profs)
+            {
+                var item = new TechnologyItem();
+                if (p.EndsWith("g"))
+                {
+                    item.Technology = p.Substring(0, p.Length - 1);
+                    item.isBold = true;
+                    item.isMerged = true;
+                    item.Color = 10079487;
+
+                }
+                else
+                    item.Technology = p;
+
+                item.Technology = item.Technology.Trim();
+
+                techs.TechnologyList.Add(item);
+            }
+            
+          
+        }
+
+        private static EngineerProfile BuildProfileP()
         {
             var profile = BuildProfile();
 
@@ -46,7 +76,7 @@ namespace ReportGenerator.Console
                 XmlSerializer xml = new XmlSerializer(typeof(EngineerProfile));
                 xml.Serialize(stream, profile);
             }
-
+            return profile;
         }
     }
 }

@@ -15,8 +15,8 @@ namespace ReportGenerator
     }
     public class Assessment
     {
-        static readonly int oleWhiteColor = ColorTranslator.ToOle(Color.White);
-        static readonly int oleGroupColor = ColorTranslator.ToOle(Color.FromArgb(255, 204, 255, 204));
+        public static readonly int oleWhiteColor = ColorTranslator.ToOle(Color.White);
+        public static readonly int oleGroupColor = ColorTranslator.ToOle(Color.FromArgb(255, 204, 255, 204));
 
         const int maxRow = 255;
         public Version Version { get; set; }
