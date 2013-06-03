@@ -130,8 +130,6 @@ namespace ReportGenerator
             worker.SetAValue(row, "Technical Area").SetBold(true).SetColor(Assessment.OleHeaderColor).SetWidth(60);
             worker.SetValue(row, "B", "Scale 0-4").SetBold(true).SetColor(Assessment.OleHeaderColor);
 
-
-
             row++;
             foreach (var item in excelRows)
             {
@@ -141,8 +139,8 @@ namespace ReportGenerator
             }
 
             newWorkBook.SaveAs("a.xls", Excel.XlFileFormat.xlOpenXMLWorkbook);
-        }
-            
+
+
         }
 
 
