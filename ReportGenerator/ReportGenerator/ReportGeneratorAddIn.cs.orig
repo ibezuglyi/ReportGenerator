@@ -127,10 +127,13 @@ namespace ReportGenerator
             }
             //2 rows separation 
             row += 2;
+<<<<<<< HEAD
+
+
+            
+=======
             worker.SetAValue(row, "Technical Area").SetBold(true).SetColor(Assessment.OleHeaderColor).SetWidth(60);
             worker.SetValue(row, "B", "Scale 0-4").SetBold(true).SetColor(Assessment.OleHeaderColor);
-
-
 
             row++;
             foreach (var item in excelRows)
@@ -141,8 +144,7 @@ namespace ReportGenerator
             }
 
             newWorkBook.SaveAs("a.xls", Excel.XlFileFormat.xlOpenXMLWorkbook);
-        }
-            
+>>>>>>> 310931e2baf530c60fe92ecc50c5df10b3384829
         }
 
 

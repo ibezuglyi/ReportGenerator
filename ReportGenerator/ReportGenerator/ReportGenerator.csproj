@@ -217,6 +217,10 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="Profiles\netdeveloper.profile" />
+    <None Include="Profiles\tester.profile">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -245,7 +249,7 @@
     <None Include="Resources\filesaveas_32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Profiles\java.profile.xml" />
+    <None Include="Profiles\javadeveloper.profile" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

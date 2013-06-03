@@ -15,8 +15,9 @@ namespace ReportGenerator
     }
     public class Assessment
     {
-        static readonly int oleWhiteColor = ColorTranslator.ToOle(Color.White);
-        static readonly int oleGroupColor = ColorTranslator.ToOle(Color.FromArgb(255, 204, 255, 204));
+        public static readonly int OleWhiteColor = ColorTranslator.ToOle(Color.White);
+        public static readonly int OleGroupColor = ColorTranslator.ToOle(Color.FromArgb(255, 204, 255, 204));
+        public static readonly int OleHeaderColor = 10079487;
 
         const int maxRow = 255;
         public Version Version { get; set; }
@@ -69,8 +70,8 @@ namespace ReportGenerator
 
             Assessment assessment = new Assessment();
             int currentRow = startRow;
-            currentRow = FindNewGroup(currentRow, ActiveSheet, oleGroupColor);
-            IList<TechnicalSkill> skillGroups = BuildTechnicalSkill(currentRow, column, oleGroupColor, ActiveSheet);
+            currentRow = FindNewGroup(currentRow, ActiveSheet, OleGroupColor);
+            IList<TechnicalSkill> skillGroups = BuildTechnicalSkill(currentRow, column, OleGroupColor, ActiveSheet);
             assessment.TechnicalSkills = skillGroups;
             return assessment;
         }
@@ -129,7 +130,7 @@ namespace ReportGenerator
                     //new group found
                     return currentRow;
                 else
-                    if (string.IsNullOrEmpty(ActiveSheet.Range[cell].Value2) && cellColor == oleWhiteColor)
+                    if (string.IsNullOrEmpty(ActiveSheet.Range[cell].Value2) && cellColor == OleWhiteColor)
                         return currentRow;
 
                 currentRow++;

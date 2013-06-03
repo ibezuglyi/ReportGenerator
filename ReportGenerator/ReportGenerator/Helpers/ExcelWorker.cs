@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,20 +20,21 @@ namespace ReportGenerator.Helpers
         {
             return GetValue(currentRow, "A");
         }
-        public void SetAValue(int currentRow, string value)
+        public Range SetAValue(int currentRow, string value)
         {
-            SetValue(currentRow, "A", value);
+            return SetValue(currentRow, "A", value);
         }
 
-        public void SetValue(int currentRow, string currentColumn, string value)
+        public Range SetValue(int currentRow, string currentColumn, string value)
         {
             var cell = GetCell(currentRow, currentColumn);
-            SetValue(cell, value);
+            return SetValue(cell, value);
         }
         public string GetValue(int currentRow, string currentColumn)
         {
             var cell = GetCell(currentRow, currentColumn);
-            return GetValue(cell);
+            var value = GetValue(cell);
+            return string.IsNullOrEmpty(value) ? value : value.Trim();
         }
 
         private static string GetCell(int currentRow, string currentColumn)
@@ -40,13 +42,40 @@ namespace ReportGenerator.Helpers
             return string.Format("{0}{1}", currentColumn, currentRow);
         }
 
-        private void SetValue(string cell, string value)
+        private Range SetValue(string cell, string value)
         {
             ActiveSheet.Range[cell].Value2 = value;
+            return ActiveSheet.Range[cell];
         }
         private string GetValue(string cell)
         {
-            return ActiveSheet.Range[cell].Value2;
+            return Convert.ToString(ActiveSheet.Range[cell].Value2);
+        }
+    }
+
+    public static class ExcelHelper
+    {
+        public static Range SetColor(this Range range, int color)
+        {
+            if (color != 0)
+                range.Interior.Color = color;
+
+            return range;
+        }
+        public static Range SetWidth(this Range range, int width)
+        {
+            range.EntireColumn.ColumnWidth = width;
+            return range;
+        }
+        public static Range SetAlignment(this Range range, Microsoft.Office.Interop.Excel.XlHAlign alignment)
+        {
+            range.Style.HorizontalAlignment = alignment;
+            return range;
+        }
+        public static Range SetBold(this Range range, bool isBold)
+        {
+            range.Style.Font.Bold = isBold;
+            return range;
         }
     }
 }
