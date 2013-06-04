@@ -13,7 +13,6 @@ namespace ReportGenerator.Settings
 {
     public partial class SettingsForm : Form
     {
-        public string SelectedConfigPath { get; set; }
         public string SelectedProfilePath { get; set; }
         public SettingsForm()
         {
@@ -26,7 +25,6 @@ namespace ReportGenerator.Settings
         }
         private void LoadData()
         {
-            textBox1.Text = ReportConfiguration.Instance.ConfigurationFilePath;
             textBox2.Text = ReportConfiguration.Instance.ConfigurationProfileDirectory;
         }
 
@@ -42,18 +40,14 @@ namespace ReportGenerator.Settings
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ReportConfiguration.Instance.ConfigurationFilePath = SelectedConfigPath;
-            ReportConfiguration.Instance.ConfigurationProfileDirectory = SelectedProfilePath;
+
+            ReportConfiguration.Instance.ConfigurationProfileDirectory = textBox2.Text;
             CloseForm();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var dialogResult = openFileDialog1.ShowDialog();
-            if (dialogResult == System.Windows.Forms.DialogResult.OK)
-            {
-                SelectedConfigPath = openFileDialog1.FileName;
-            }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -61,7 +55,7 @@ namespace ReportGenerator.Settings
             var dialogResult = folderBrowserDialog1.ShowDialog();
             if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
-
+                textBox2.Text = folderBrowserDialog1.SelectedPath;
             }
         }
     }

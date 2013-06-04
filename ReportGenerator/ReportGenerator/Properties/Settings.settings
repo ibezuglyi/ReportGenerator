@@ -8,5 +8,11 @@
     <Setting Name="ConfigurationProfileDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">D:\excel\</Value>
     </Setting>
+    <Setting Name="ProfilePattern" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{0}.profile</Value>
+    </Setting>
+    <Setting Name="Profiles" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">tester;netdeveloper;javadeveloper</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

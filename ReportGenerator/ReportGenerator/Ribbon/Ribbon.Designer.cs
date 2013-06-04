@@ -69,6 +69,7 @@
             this.button1.Image = global::ReportGenerator.Properties.Resources.filesaveas_32;
             this.button1.Label = "Save as new assessment";
             this.button1.Name = "button1";
+            this.button1.ScreenTip = "Convert assessment to new format";
             this.button1.ShowImage = true;
             this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
@@ -78,6 +79,7 @@
             this.button3.Image = global::ReportGenerator.Properties.Resources.filesaveas_32;
             this.button3.Label = "Save as old assessment";
             this.button3.Name = "button3";
+            this.button3.ScreenTip = "Convert assessment to old format";
             this.button3.ShowImage = true;
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
@@ -87,6 +89,7 @@
             this.button2.Image = global::ReportGenerator.Properties.Resources.templates_32_32;
             this.button2.Label = "Config";
             this.button2.Name = "button2";
+            this.button2.ScreenTip = "Plugin configuration";
             this.button2.ShowImage = true;
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
             // 

@@ -15,7 +15,9 @@ namespace ReportGenerator.Console
         {
 
             EngineerProfile prof = new EngineerProfile();
-
+            prof.StartRow = 2;
+            prof.TechnicalAreaText = "Technical Area";
+            prof.ScaleText = "Scale (0-4)";
             prof.Header.Scales.AddRange(
 
                 new List<string>() { "Scale (0-4)", "0 - No experience.", "1 - Beginner (is able to perform simple task under supervision, usually less than 1 year of experience)",
@@ -23,7 +25,7 @@ namespace ReportGenerator.Console
                 "3 - Expert (is able to perform task without supervision, mentor/coach for others, usually 2-5 year of experience)",
                 "4 - Guru"
                 });
-          
+
             return prof;
 
         }
@@ -63,8 +65,8 @@ namespace ReportGenerator.Console
 
                 techs.TechnologyList.Add(item);
             }
-            
-          
+
+
         }
 
         private static EngineerProfile BuildProfileP()

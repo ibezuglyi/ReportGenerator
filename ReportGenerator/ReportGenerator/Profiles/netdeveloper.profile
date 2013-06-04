@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<EngineerProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Profile="NetDeveloper">
+<EngineerProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" StartRow="2" TechnicalAreaText="Technical Area" ScaleText="Scale (0-4)">
     <Header>
         <Scales>
             <ScaleDescription>Scale (0-4)</ScaleDescription>
@@ -27,7 +27,7 @@
                     <MapToTechnology>2) .Net technologies</MapToTechnology>
                 </MapToTechnologies>
             </TechnologyItem>
-            <TechnologyItem Technology="C#" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
+            <TechnologyItem Technology="C#" Color="0" isBold="false" isMerged="false" IsKeyWord="true" Method="Default">
                 <MapToTechnologies >
                     <MapToTechnology>C#</MapToTechnology>
                 </MapToTechnologies>
@@ -37,8 +37,9 @@
                     <MapToTechnology>Framework 2.0</MapToTechnology>
                 </MapToTechnologies>
             </TechnologyItem>
-            <TechnologyItem Technology="Framework 3.5" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
-                <MapToTechnologies >
+            <TechnologyItem Technology="Framework 3.5" Color="0" isBold="false" isMerged="false" IsKeyWord="true" Method="Default">
+                <MapToTechnologies>
+                  <MapToTechnology>Framework 3.5</MapToTechnology>
                 </MapToTechnologies>
             </TechnologyItem>
             <TechnologyItem Technology="Framework 4.0" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
@@ -61,7 +62,7 @@
                     <MapToTechnology>Enterprise Library</MapToTechnology>
                 </MapToTechnologies>
             </TechnologyItem>
-            <TechnologyItem Technology="Silverlight" Color="0" isBold="false" isMerged="false" IsKeyWord="false" Method="Default">
+            <TechnologyItem Technology="Silverlight" Color="0" isBold="false" isMerged="false" IsKeyWord="true" Method="Default">
                 <MapToTechnologies >
                     <MapToTechnology>Silverlight</MapToTechnology>
                 </MapToTechnologies>
@@ -232,7 +233,7 @@
                     <MapToTechnology>Enterprise Architect</MapToTechnology>
                 </MapToTechnologies>
             </TechnologyItem>
-            <TechnologyItem Technology="3) Prototyping modeling" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+            <TechnologyItem Technology="3) Prototyping modeling" Color="0" isBold="false" isMerged="true" IsKeyWord="false" Method="Default">
                 <MapToTechnologies >
                     <MapToTechnology>3) Prototyping modeling</MapToTechnology>
                 </MapToTechnologies>
@@ -322,7 +323,7 @@
                     <MapToTechnology>Domain Driven Design (DDD)</MapToTechnology>
                 </MapToTechnologies>
             </TechnologyItem>
-            <TechnologyItem Technology="6) Refactoring" Color="13434828" isBold="true" isMerged="true" IsKeyWord="false" Method="Default">
+            <TechnologyItem Technology="6) Refactoring" Color="0" isBold="false" isMerged="true" IsKeyWord="false" Method="Default">
                 <MapToTechnologies >
                     <MapToTechnology>6) Refactoring</MapToTechnology>
                 </MapToTechnologies>

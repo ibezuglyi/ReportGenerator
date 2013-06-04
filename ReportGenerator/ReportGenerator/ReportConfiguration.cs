@@ -10,7 +10,6 @@ namespace ReportGenerator
         private static ReportConfiguration instance;
         private ReportConfiguration()
         {
-            ConfigurationFilePath = ReportGenerator.Properties.Settings.Default.ConfigurationPath;
             ConfigurationProfileDirectory = ReportGenerator.Properties.Settings.Default.ConfigurationProfileDirectory;
         }
 
@@ -22,7 +21,7 @@ namespace ReportGenerator
                 return instance;
             }
         }
-        public string ConfigurationFilePath { get; set; }
+        
         public string ConfigurationProfileDirectory { get; set; }
 
         private void LoadConfiguration()

@@ -62,6 +62,11 @@ namespace ReportGenerator.Helpers
 
             return range;
         }
+        public static Range SetHeight(this Range range, int height)
+        {
+            range.EntireRow.RowHeight = height;
+            return range;
+        }
         public static Range SetWidth(this Range range, int width)
         {
             range.EntireColumn.ColumnWidth = width;

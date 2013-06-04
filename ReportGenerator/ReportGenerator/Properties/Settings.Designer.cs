@@ -40,5 +40,23 @@ namespace ReportGenerator.Properties {
                 return ((string)(this["ConfigurationProfileDirectory"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("{0}.profile")]
+        public string ProfilePattern {
+            get {
+                return ((string)(this["ProfilePattern"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tester;netdeveloper;javadeveloper")]
+        public string Profiles {
+            get {
+                return ((string)(this["Profiles"]));
+            }
+        }
     }
 }

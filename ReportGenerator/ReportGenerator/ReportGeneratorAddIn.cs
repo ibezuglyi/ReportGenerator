@@ -1,6 +1,8 @@
-﻿using ReportGenerator.Converters;
+﻿using Microsoft.Office.Core;
+using ReportGenerator.Converters;
 using ReportGenerator.Helpers;
 using ReportGenerator.Profiles;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace ReportGenerator
 {
     public partial class ReportGeneratorAddIn
     {
+        readonly string defaultScaleColumn = "B";
         private Excel.Worksheet sheet;
         private Excel.Worksheet ActiveSheet
         {
@@ -105,60 +108,114 @@ namespace ReportGenerator
 
         public void ConvertAssessment(AssessmentConverter converter)
         {
-            Assessment oldAssessment = Assessment.Build(ActiveSheet);
-            //var newAssessment = converter.Convert(oldAssessment, ReportConfiguration.Instance.ConfigurationFilePath);
-
-            EngineerProfile profile = LoadEngineerProfile(oldAssessment);
-            if (profile == null)
+            //verify if sheet exists
+            try
             {
-                System.Windows.Forms.MessageBox.Show("Unable to detect a profile of assessment, ensure please: 1) profile configuration has keywords selected, 2) assessment has keywords.");
+                var value = ActiveSheet.Range["A1"].Value2;
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Select assessment first before you start using plugin.", "Format error");
                 return;
             }
-            var excelRows = converter.Convert(oldAssessment, profile);
 
+            LoadAllProfiles();
+            var techologyGroups = GetTechologyGroups(ProfilesDictionary);
+
+            Assessment assessment = Assessment.Build(ActiveSheet, techologyGroups);
+
+            if (assessment == null)
+            {
+                System.Windows.Forms.MessageBox.Show("Unable to convert assessment, unknown format.", "Format error");
+                return;
+            }
+
+            EngineerProfile profile = LoadEngineerProfile(assessment);
+            if (profile == null)
+            {
+                System.Windows.Forms.MessageBox.Show("Unable to detect a profile of assessment, ensure please: 1) profile configuration has keywords selected, 2) assessment has keywords.", "Format error");
+                return;
+            }
+            string workbookName = ActiveWorkbook.Name;
+            var excelRows = converter.Convert(assessment, profile);
+
+            if (Workbooks == null)
+            {
+                System.Windows.Forms.MessageBox.Show("Plugin requires restart Excel.", "Internal error");
+                return;
+            }
             var newWorkBook = Workbooks.Add();
             var activeSheet = newWorkBook.ActiveSheet as Excel.Worksheet;
             //write header
             var worker = new ExcelWorker(activeSheet);
+
+            //header section
             int row = 2;
-            foreach (var header in profile.Header.Scales)
-            {
-                worker.SetAValue(row++, header);
-            }
+            row = WriteHeader(profile, worker, row);
             //2 rows separation 
             row += 2;
-            worker.SetAValue(row, "Technical Area").SetBold(true).SetColor(Assessment.OleHeaderColor).SetWidth(60);
-            worker.SetValue(row, "B", "Scale 0-4").SetBold(true).SetColor(Assessment.OleHeaderColor);
+            //
+            worker.SetAValue(row, profile.TechnicalAreaText).SetBold(true).SetColor(Assessment.OleHeaderColor).SetWidth(60).SetHeight(15);
+            worker.SetValue(row, defaultScaleColumn, profile.ScaleText).SetBold(true).SetColor(Assessment.OleHeaderColor);
 
             row++;
             foreach (var item in excelRows)
             {
                 worker.SetAValue(row, item.Technology).SetColor(item.Color).SetBold(item.isBold);
-                worker.SetValue(row, "B", item.Scale).SetColor(item.Color).SetBold(item.isBold);
+                worker.SetValue(row, defaultScaleColumn, item.Scale).SetColor(item.Color).SetBold(item.isBold);
                 row++;
             }
 
-            newWorkBook.SaveAs("a.xls", Excel.XlFileFormat.xlOpenXMLWorkbook);
-
-
+            MsoFileDialogType dlgType = MsoFileDialogType.msoFileDialogSaveAs;
+            Application.FileDialog[dlgType].InitialFileName = string.Format("{0}_{1}", converter.ConverterName, workbookName);
+            Application.FileDialog[dlgType].Show();
+            if (Application.FileDialog[dlgType].SelectedItems.Count > 0)
+            {
+                ActiveWorkbook.SaveAs(Application.FileDialog[dlgType].SelectedItems.Item(1), Excel.XlFileFormat.xlOpenXMLWorkbook);
+            }
         }
 
+        private IEnumerable<string> GetTechologyGroups(Dictionary<string, EngineerProfile> profilesDictionary)
+        {
+            List<string> allTechologyGroups = new List<string>();
+            foreach (var item in profilesDictionary.Values)
+            {
+                if (item != null)
+                {
+                    allTechologyGroups.AddRange(item.GetProfileTechnologyGroups());
+                }
+            }
+            return allTechologyGroups.Distinct();
+        }
 
-
+        private static int WriteHeader(EngineerProfile profile, ExcelWorker worker, int row)
+        {
+            foreach (var header in profile.Header.Scales)
+                worker.SetAValue(row++, header);
+            return row;
+        }
         private EngineerProfile LoadEngineerProfile(Assessment assessment)
         {
-            ProfilesDictionary.Clear();
-            ProfilesDictionary.Add("tester", LoadProfile("tester"));
-            ProfilesDictionary.Add("netdeveloper", LoadProfile("netdeveloper"));
-            ProfilesDictionary.Add("javadeveloper", LoadProfile("javadeveloper"));
             return DetectProfile(ProfilesDictionary, assessment);
+        }
+
+        private void LoadAllProfiles()
+        {
+            var profiles = GetProfileNames();
+            ProfilesDictionary.Clear();
+            profiles.ForEach(profile => ProfilesDictionary.Add(profile, LoadProfile(profile)));
+        }
+
+        private static List<string> GetProfileNames()
+        {
+            return Properties.Settings.Default.Profiles.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
         }
 
         private EngineerProfile LoadProfile(string pattern)
         {
             EngineerProfile profile = null;
             string path = ReportConfiguration.Instance.ConfigurationProfileDirectory;
-            pattern = string.Format("{0}.profile", pattern);
+            pattern = string.Format(Properties.Settings.Default.ProfilePattern, pattern);
             var configFile = Directory.GetFiles(path, pattern, SearchOption.TopDirectoryOnly).SingleOrDefault();
             if (string.IsNullOrEmpty(configFile))
                 System.Windows.Forms.MessageBox.Show(string.Format("Unable to load {0} config file, ensure file exists in {1} ", pattern, path), "Error");

@@ -13,7 +13,13 @@ namespace ReportGenerator.Profiles
         public Header Header { get; set; }
 
         [XmlAttribute]
-        public Profile Profile { get; set; }
+        public int StartRow { get; set; }
+
+        [XmlAttribute]
+        public string TechnicalAreaText { get; set; }
+
+        [XmlAttribute]
+        public string ScaleText { get; set; }
 
         [XmlElement]
         public Technologies OldProfile { get; set; }
@@ -34,6 +40,14 @@ namespace ReportGenerator.Profiles
             allTechnologies.AddRange(NewProfile.TechnologyList.Where(r => r.IsKeyWord).Select(r => r.Technology));
 
             return allTechnologies.Distinct();
+        }
+
+        public IEnumerable<string> GetProfileTechnologyGroups()
+        {
+            List<string> technologyGroups = new List<string>();
+            technologyGroups.AddRange(OldProfile.TechnologyList.Where(r => r.isBold).Select(r => r.Technology));
+            technologyGroups.AddRange(NewProfile.TechnologyList.Where(r => r.isBold).Select(r => r.Technology));
+            return technologyGroups.Distinct();
         }
     }
 
@@ -83,12 +97,6 @@ namespace ReportGenerator.Profiles
         [XmlArray]
         [XmlArrayItem("ScaleDescription")]
         public List<string> Scales { get; set; }
-    }
-    public enum Profile
-    {
-        NetDeveloper,
-        JavaDeveloper,
-        Tester
     }
     public enum Method
     {

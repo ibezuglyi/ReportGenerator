@@ -56,9 +56,9 @@ namespace ReportGenerator
             }
             return items;
         }
-        public static Assessment Build(Microsoft.Office.Interop.Excel.Worksheet ActiveSheet)
+        public static Assessment Build(Microsoft.Office.Interop.Excel.Worksheet ActiveSheet, IEnumerable<string> technologyGroups)
         {
-            int startRow = GetStartRowNumber(ActiveSheet);
+            int startRow = GetStartRowNumber(ActiveSheet, "Technical Area", "Technical Knowledge", "General testing knowledge");
             if (startRow == 0)
                 //technical area not found
                 return null;
@@ -70,19 +70,19 @@ namespace ReportGenerator
 
             Assessment assessment = new Assessment();
             int currentRow = startRow;
-            currentRow = FindNewGroup(currentRow, ActiveSheet, OleGroupColor);
-            IList<TechnicalSkill> skillGroups = BuildTechnicalSkill(currentRow, column, OleGroupColor, ActiveSheet);
+            currentRow = FindNewGroup(currentRow, ActiveSheet, technologyGroups);
+            IList<TechnicalSkill> skillGroups = BuildTechnicalSkill(currentRow, column, technologyGroups, ActiveSheet);
             assessment.TechnicalSkills = skillGroups;
             return assessment;
         }
 
-        private static IList<TechnicalSkill> BuildTechnicalSkill(int currentRow, string column, int groupColor, Microsoft.Office.Interop.Excel.Worksheet activeSheet)
+        private static IList<TechnicalSkill> BuildTechnicalSkill(int currentRow, string column, IEnumerable<string> technologyGroups, Microsoft.Office.Interop.Excel.Worksheet activeSheet)
         {
             ExcelWorker worker = new ExcelWorker(activeSheet);
             List<TechnicalSkill> skillList = new List<TechnicalSkill>();
             while (true)
             {
-                int nextGroupRowNumber = FindNewGroup(currentRow + 1, activeSheet, groupColor);
+                int nextGroupRowNumber = FindNewGroup(currentRow + 1, activeSheet, technologyGroups);
                 if (nextGroupRowNumber == currentRow + 1)
                     break;
 
@@ -115,18 +115,19 @@ namespace ReportGenerator
         {
             return worker.GetAValue(currentRow);
         }
-
-
-
-
-        private static int FindNewGroup(int currentRow, Microsoft.Office.Interop.Excel.Worksheet ActiveSheet, int oleGroupColor)
+        private static int FindNewGroup(int currentRow, Microsoft.Office.Interop.Excel.Worksheet ActiveSheet, IEnumerable<string> technologyGroups)
         {
             while (currentRow < maxRow)
             {
                 var cell = string.Format("A{0}", currentRow);
                 int cellColor = (int)ActiveSheet.Range[cell].Interior.Color;
+                //int fontsize = (int)ActiveSheet.Range[cell].Style.Font.Size;
+                //bool isBold = (bool)ActiveSheet.Range[cell].Style.Font.Bold;
+                //if ((oleGroupColor == cellColor) || //new format condition
+                //    (fontsize == 12 && isBold))     //old format condition
 
-                if (oleGroupColor == cellColor)
+                string value = Convert.ToString(ActiveSheet.Range[cell].Value2);
+                if (technologyGroups.Contains(value))
                     //new group found
                     return currentRow;
                 else
@@ -151,12 +152,12 @@ namespace ReportGenerator
 
                 columnLetter++;
             }
-            return null;
+            return "B";
 
 
         }
 
-        private static int GetStartRowNumber(Microsoft.Office.Interop.Excel.Worksheet ActiveSheet)
+        private static int GetStartRowNumber(Microsoft.Office.Interop.Excel.Worksheet ActiveSheet, params string[] headerTexts)
         {
             int currentRow = 1;
             int startRow = 0;
@@ -165,7 +166,7 @@ namespace ReportGenerator
             {
                 cell = string.Format("A{0}", currentRow);
                 string cellValue = ActiveSheet.Range[cell].Value2;
-                if (cellValue == "Technical Area")
+                if (headerTexts.Contains(cellValue))
                     startRow = currentRow;
                 else
                     currentRow++;
